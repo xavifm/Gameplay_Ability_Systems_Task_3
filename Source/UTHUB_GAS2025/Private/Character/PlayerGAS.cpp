@@ -118,7 +118,6 @@ void APlayerGAS::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	}
 }
 
-
 void APlayerGAS::InitializeAbilities()
 {
 	if (!HasAuthority() || !AbilitySystemComponent) return;

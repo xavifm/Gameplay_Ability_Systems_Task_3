@@ -6,11 +6,11 @@
 #include "CharacterAttributeSet.generated.h"
 
 #define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
-    FGameplayAttribute Get##PropertyName##Attribute() const \
-    { \
-        static FProperty* Property = FindFieldChecked<FProperty>(ClassName::StaticClass(), GET_MEMBER_NAME_CHECKED(ClassName, PropertyName)); \
-        return FGameplayAttribute(Property); \
-    }
+	GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
+
 
 UCLASS()
 class UTHUB_GAS2025_API UCharacterAttributeSet : public UAttributeSet
@@ -27,6 +27,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
 	FGameplayAttributeData Speed;
 	ATTRIBUTE_ACCESSORS(UCharacterAttributeSet, Speed)
+
+	void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data);
 
 private:
 	const float BASE_HEALTH = 100;
