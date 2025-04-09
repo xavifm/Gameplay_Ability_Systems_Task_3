@@ -10,6 +10,7 @@ UGA_Defend::UGA_Defend()
     AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Ability.Defend")));
     ActivationOwnedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Defending")));
     ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Attacking")));
+    ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Aiming")));
 }
 
 void UGA_Defend::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
@@ -28,6 +29,8 @@ void UGA_Defend::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const 
             Character->PlayAnimMontage(DefendMontage);
         }
     }
+    
+    UE_LOG(LogTemp, Warning, TEXT("Defending!"));
 
     UAbilityTask_WaitGameplayEvent* WaitEvent = UAbilityTask_WaitGameplayEvent::WaitGameplayEvent(this, FGameplayTag::RequestGameplayTag("Input.Release.Defend"));
     if(WaitEvent) 
@@ -54,6 +57,8 @@ void UGA_Defend::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGame
             Character->StopAnimMontage(DefendMontage);
         }
     }
+
+    UE_LOG(LogTemp, Warning, TEXT("Defense mode stopped!"));
 
     Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
 }

@@ -16,10 +16,7 @@ void UGA_Jump::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FG
     }
 
     if (ACharacter* Character = Cast<ACharacter>(ActorInfo->AvatarActor)) 
-    {
         Character->Jump();
-        //animation
-    }
 
     EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
 }
