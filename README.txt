@@ -1,0 +1,4 @@
+- **Mouse0 (Left Click)**: Attack  
+- **Mouse1 (Right Click)**: Aim  
+- **Key E**: Defend  
+- **Spacebar**: Jump
